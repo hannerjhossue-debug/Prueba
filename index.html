@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Página de Prueba</title>
+    <style>
+        /* Estilos básicos modernos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .emoji {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .value {
+            color: #667eea;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .emoji {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <span class="emoji">🚀</span>
+        <h1>¡Hola, GitHub Pages!</h1>
+        <span class="badge">✅ Prueba exitosa</span>
+
+        <p>
+            Esta es una página de prueba creada para demostrar el despliegue en 
+            <strong>GitHub Pages</strong>. Todo funciona correctamente.
+        </p>
+
+        <div class="info">
+            <div class="info-item">
+                <span class="label">🌐 Estado</span>
+                <span class="value">En línea</span>
+            </div>
+            <div class="info-item">
+                <span class="label">📅 Fecha</span>
+                <span class="value" id="fecha"></span>
+            </div>
+            <div class="info-item">
+                <span class="label">🕐 Hora</span>
+                <span class="value" id="hora"></span>
+            </div>
+            <div class="info-item">
+                <span class="label">📱 Dispositivo</span>
+                <span class="value" id="dispositivo"></span>
+            </div>
+        </div>
+
+        <button class="btn" onclick="actualizarHora()">🔄 Actualizar hora</button>
+
+        <div class="footer">
+            Desplegado con ❤️ en GitHub Pages &bull; 2026
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar la fecha y hora actual
+        function actualizarHora() {
+            const ahora = new Date();
+            const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesHora = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+
+            document.getElementById('fecha').textContent = ahora.toLocaleDateString('es-ES', opcionesFecha);
+            document.getElementById('hora').textContent = ahora.toLocaleTimeString('es-ES', opcionesHora);
+        }
+
+        // Detectar el dispositivo (simple)
+        function detectarDispositivo() {
+            const userAgent = navigator.userAgent;
+            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                return '🍎 iOS';
+            } else if (/Android/i.test(userAgent)) {
+                return '🤖 Android';
+            } else if (/Windows/i.test(userAgent)) {
+                return '🖥️ Windows';
+            } else if (/Mac/i.test(userAgent)) {
+                return '🍏 macOS';
+            } else if (/Linux/i.test(userAgent)) {
+                return '🐧 Linux';
+            } else {
+                return '💻 Otro';
+            }
+        }
+
+        // Inicializar
+        document.getElementById('dispositivo').textContent = detectarDispositivo();
+        actualizarHora();
+
+        // Actualizar cada minuto
+        setInterval(actualizarHora, 60000);
+    </script>
+
+</body>
+</html>
